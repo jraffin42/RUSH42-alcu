@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   board.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/19 11:33:36 by jraffin           #+#    #+#             */
-/*   Updated: 2022/02/06 05:17:03 by jraffin          ###   ########.fr       */
+/*   Created: 2022/02/11 21:38:57 by wszurkow          #+#    #+#             */
+/*   Updated: 2022/02/12 12:10:05 by jraffin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
+#ifndef BOARD_H
+# define BOARD_H
 
-void	*ft_calloc(size_t count, size_t size)
+# include <stddef.h>
+
+typedef struct s_heap
 {
-	char	*mem;
+	int				nb_al;
+	struct s_heap	*previous;
+	struct s_heap	*next;
+}	t_heap;
 
-	mem = malloc(count * size);
-	if (mem)
-		return (ft_memset(mem, 0, count * size));
-	else
-		return (NULL);
-}
+typedef struct s_board
+{
+	t_heap	*first;
+	t_heap	*last;
+	size_t	nb_of_heaps;
+}	t_board;
+
+int		parse_board(int fd, t_board *board);
+void	display_board(t_board *board);
+
+#endif

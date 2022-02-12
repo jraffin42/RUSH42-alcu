@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_gnl_leaksafe.c                                  :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 19:42:49 by jraffin           #+#    #+#             */
-/*   Updated: 2022/02/07 15:33:51 by jraffin          ###   ########.fr       */
+/*   Updated: 2022/02/12 07:35:33 by jraffin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
-#include "libft.h"
+#include "utils.h"
 
-static void	reset_list(t_gnlbuflist_safe *list)
+static void	reset_list(t_gnlbuflist *list)
 {
 	t_gnlbuf	*to_free;
 	int			errno_save;
@@ -25,8 +25,7 @@ static void	reset_list(t_gnlbuflist_safe *list)
 	{
 		to_free = list->first;
 		list->first = list->first->next;
-		if (to_free != &list->safebuffer)
-			free(to_free);
+		free(to_free);
 	}
 	errno = errno_save;
 	list->last = NULL;
@@ -36,7 +35,7 @@ static void	reset_list(t_gnlbuflist_safe *list)
 	list->found_nl = NULL;
 }
 
-static int	read_input(t_gnlbuflist_safe *list, int fd)
+static int	read_input(t_gnlbuflist *list, int fd)
 {
 	ssize_t		readval;
 
@@ -65,7 +64,7 @@ static int	read_input(t_gnlbuflist_safe *list, int fd)
 	return (0);
 }
 
-static void	extract_to_line(t_gnlbuflist_safe *list, char *line, size_t linelen)
+static void	extract_to_line(t_gnlbuflist *list, char *line, size_t linelen)
 {
 	t_gnlbuf	*to_free;
 	size_t		copylen;
@@ -82,8 +81,7 @@ static void	extract_to_line(t_gnlbuflist_safe *list, char *line, size_t linelen)
 		{
 			to_free = list->first;
 			list->first = list->first->next;
-			if (to_free != &list->safebuffer)
-				free(to_free);
+			free(to_free);
 			list->nb_buf--;
 			list->cursor = 0;
 		}
@@ -94,7 +92,7 @@ static void	extract_to_line(t_gnlbuflist_safe *list, char *line, size_t linelen)
 	}
 }
 
-static char	*retreive_line(t_gnlbuflist_safe *list)
+static char	*retreive_line(t_gnlbuflist *list)
 {
 	char	*line;
 	size_t	linelen;
@@ -112,36 +110,24 @@ static char	*retreive_line(t_gnlbuflist_safe *list)
 		return (reset_list(list), NULL);
 	line[linelen] = '\0';
 	extract_to_line(list, line, linelen);
-	if (list->nb_buf && list->first != &list->safebuffer)
-	{
-		ft_memcpy(list->safebuffer.data + list->cursor,
-			list->first->data + list->cursor, list->last_size - list->cursor);
-		list->safebuffer.next = NULL;
-		list->first = (free(list->first), list->last = NULL);
-	}
 	return (line);
 }
 
-char	*ft_gnl_leaksafe(int fd)
+char	*get_next_line(int fd)
 {
-	static t_gnlbuflist_safe	buflist[GNL_FD_MAXSIZE];
-	char						*line;
+	static t_gnlbuflist	buflist[GNL_FD_MAXSIZE];
+	char				*line;
 
 	if (GNL_BUFSIZE == 0)
 		return (errno = ENOMEM, NULL);
 	if (fd < 0 || fd >= GNL_FD_MAXSIZE)
 		return (errno = EBADFD, NULL);
-	if (buflist[fd].nb_buf)
-	{
-		buflist[fd].first = &buflist[fd].safebuffer;
-		buflist[fd].last = &buflist[fd].safebuffer;
-	}
 	if (!buflist[fd].found_nl && read_input(&buflist[fd], fd))
 		return (reset_list(&buflist[fd]), NULL);
 	line = retreive_line(&buflist[fd]);
 	if (buflist[fd].nb_buf)
 		buflist[fd].found_nl = ft_memchr(
-				buflist[fd].safebuffer.data + buflist[fd].cursor, '\n',
+				buflist[fd].first->data + buflist[fd].cursor, '\n',
 				buflist[fd].last_size - buflist[fd].cursor);
 	else
 		buflist[fd].found_nl = NULL;
