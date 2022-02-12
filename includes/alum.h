@@ -6,7 +6,7 @@
 /*   By: wszurkow <wszurkow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 21:38:57 by wszurkow          #+#    #+#             */
-/*   Updated: 2022/02/11 22:27:30 by wszurkow         ###   ########.fr       */
+/*   Updated: 2022/02/11 22:31:29 by wszurkow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@
 int get_next_line(char **line, int fd);
 int			ft_atoi(const char *str);
 int	ft_atoi_err(const char *str, int *nbr);
+int parse_input_file(char **av);
 
 #endif

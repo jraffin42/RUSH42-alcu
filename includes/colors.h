@@ -6,7 +6,7 @@
 /*   By: wszurkow <wszurkow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 21:53:00 by wszurkow          #+#    #+#             */
-/*   Updated: 2022/02/11 21:53:15 by wszurkow         ###   ########.fr       */
+/*   Updated: 2022/02/12 02:13:40 by wszurkow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@
 #define NO_COLOR		"\033[0m"
 #define BOLD			"\e[1m"
 #define _R				"\e[0m"
-#define _CLEAR			std::cout << "\x1B[2J\x1B[H"
+#define _CLEAR			"\x1B[2J\x1B[H"
 
 #endif

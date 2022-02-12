@@ -26,6 +26,7 @@ SRCS_FILES	    = \
 				  ./main.c \
 				  ./srcs/gnl.c \
 				  ./srcs/ft_atoi.c \
+				  ./srcs/parse_input_file.c
 
 # RULES #################
 all:		${NAME}

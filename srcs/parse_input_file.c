@@ -6,7 +6,7 @@
 /*   By: wszurkow <wszurkow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 22:15:57 by wszurkow          #+#    #+#             */
-/*   Updated: 2022/02/11 22:16:24 by wszurkow         ###   ########.fr       */
+/*   Updated: 2022/02/11 22:30:49 by wszurkow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int is_valid_range(char *str)
 {
 	int i;
 
-	i = ft_atoi(str);
+	if (ft_atoi_err(str, &i) == 1)
+		return (ERROR);
 	if (i < 1 || i > 10000)
 		return (ERROR);
 	return (OK);
