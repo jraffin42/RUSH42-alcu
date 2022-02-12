@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 04:03:44 by jraffin           #+#    #+#             */
-/*   Updated: 2022/02/12 17:52:35 by wszurkow         ###   ########.fr       */
+/*   Updated: 2022/02/12 18:07:54 by wszurkow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static int	line_is_valid_number(const char *line, int *nbr)
 	{
 		tmp *= 10;
 		tmp += *line - '0';
-		if (tmp >= 10000 || tmp < 1)
-			return (0);
+		if (tmp > 10000 || tmp < 1)
+			return (1);
 		line++;
 	}
 	if (*line && *line != '\n')
