@@ -6,7 +6,7 @@
 #    By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/12 14:25:17 by jraffin           #+#    #+#              #
-#    Updated: 2022/02/12 18:25:29 by jraffin          ###   ########.fr        #
+#    Updated: 2022/02/12 20:40:19 by wszurkow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ COMMONSRCS			:=	main.c				\
 						board.c				\
 						get_next_line.c		\
 						utils.c				\
+						display.c \
 
 NOBONUSSRCS			:=
 

@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 21:30:58 by wszurkow          #+#    #+#             */
-/*   Updated: 2022/02/12 17:21:12 by wszurkow         ###   ########.fr       */
+/*   Updated: 2022/02/12 20:42:15 by wsz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,24 +122,14 @@ int	main(int argc, char **argv)
 		return (write(2, "ERROR\n", 6), 1);
 	if (argv[1])
 		fd = open(argv[1], O_RDONLY);
-	if (fd == -1 || parse_board(fd, &board))
-		return (1);
-	if (board.nb_of_heaps)
-	{
-		display_board(&board);
-		write (1, "\033[0;33mPRESS ENTER TO CONTINUE\n\e[0m", 36);
-		free(get_next_line(0));
-	}
+	if (fd == -1 || parse_board(fd, &board) || board.nb_of_heaps == 0)
+		return (write(2, "ERROR\n", 6), 1);
+	display_welcome(&board);
 	while (board.nb_of_heaps)
 	{
 		next_move(&player, &board);
-		if (!board.nb_of_heaps)
-		{
-			if (player)
-				write (1, "The AI won! Sorry...\n", 22);
-			else
-				write (1, "You are the winner! Congratulations!\n", 37);
-		}
+		if (board.nb_of_heaps == 0)
+			display_winner(player);
 	}
 	return (0);
 }
