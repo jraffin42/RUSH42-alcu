@@ -6,14 +6,14 @@
 #    By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/12 14:25:17 by jraffin           #+#    #+#              #
-#    Updated: 2022/02/12 17:29:05 by wszurkow         ###   ########.fr        #
+#    Updated: 2022/02/12 18:22:36 by jraffin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SHELL				=	/bin/sh
 
 PROGNAME			:=	alcu
-PROGNAME_BONUS		:=	visualizer
+PROGNAME_BONUS		:=	$(PROGNAME)_bonus
 
 INCLUDEDIR			:=	inc
 SRCDIR				:=	src
