@@ -6,7 +6,7 @@
 #    By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/12 14:25:17 by jraffin           #+#    #+#              #
-#    Updated: 2022/02/12 08:01:54 by jraffin          ###   ########.fr        #
+#    Updated: 2022/02/12 14:24:20 by wszurkow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,13 @@ SRCDIR				:=	src
 OBJDIR				:=	./obj
 DEBUGDIR			:=	./debugobj
 
-COMMONSRCS			:=	main.c				\
+COMMONSRCS			:=	main_wsz.c				\
 						board.c				\
 						get_next_line.c		\
 						utils.c				\
+						print_alums.c \
+						prompt.c \
+						lists.c \
 
 NOBONUSSRCS			:=
 

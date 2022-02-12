@@ -6,7 +6,7 @@
 /*   By: wszurkow <wszurkow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 13:39:19 by wszurkow          #+#    #+#             */
-/*   Updated: 2022/02/12 13:43:49 by wszurkow         ###   ########.fr       */
+/*   Updated: 2022/02/12 14:45:02 by wszurkow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static size_t	largest_stack(t_list *lst)
 {
-	size_t	largest_int;
+	int	largest_int;
 
 	if (lst == NULL)
 		return (0);
@@ -41,7 +41,7 @@ static void	print_single_line(size_t n, size_t largest)
 		if (n != 0)
 			write (1, " ", 1);
 	}
-	NEWLINE;
+	write(1, "\n", 1);
 }
 
 void	print_alums(t_list *lst)
@@ -50,7 +50,7 @@ void	print_alums(t_list *lst)
 	size_t	largest;
 
 	if (lst == NULL)
-		return;
+		return ;
 	write(1, _CLEAR, 8);
 	largest = largest_stack(lst);
 	while (lst)
