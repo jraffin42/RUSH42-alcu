@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 21:30:58 by wszurkow          #+#    #+#             */
-/*   Updated: 2022/02/12 17:00:38 by wszurkow         ###   ########.fr       */
+/*   Updated: 2022/02/12 17:21:12 by wszurkow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,30 +68,24 @@ static int	get_player_move(t_board *board)
 			write(1, "You have no choice but to take the 1 last item :\n", 49);
 		line = get_next_line(0);
 		if (!line || (*line != '1'
-					&& (*line != '2' || board->last->nb_al < 2)
-					&& (*line != '3' || board->last->nb_al < 3))
-				|| (line[1] != '\n' && line[1] != '\0'))
+				&& (*line != '2' || board->last->nb_al < 2)
+				&& (*line != '3' || board->last->nb_al < 3))
+			|| (line[1] != '\n' && line[1] != '\0'))
 		{
-			write(1, CLEAR, 8);
-			display_board(board);
-			write (1, RED, 8);
-			write (1, "Invalid choice\n", 15);
-			write (1, RESET , 5);
-			line = (free(line), NULL);
+			(write(1, CLEAR, 8), display_board(board));
+			(write (1, RED, 8), write (1, "Invalid choice\n", 15));
+			line = (write (1, RESET, 5), free(line), NULL);
 		}
 	}
-	write(1, CLEAR, 8);
-	move = *line - '0';
-	free(line);
-	return (move);
+	move = (write(1, CLEAR, 8), *line - '0');
+	return (free(line), move);
 }
-
 
 static void	next_move(int *player, t_board *board)
 {
 	t_heap		*to_free;
 	int			move;
-	char *ai_msg;
+	char		*ai_msg;
 
 	if (*player)
 		move = get_player_move(board);
@@ -109,15 +103,11 @@ static void	next_move(int *player, t_board *board)
 			board->first = NULL;
 		free(to_free);
 	}
-	if (board->nb_of_heaps)
-	{
-		*player = !*player;
-		display_board(board);
-		write (1, GREEN, 8);
-		write (1, ai_msg, 10);
-		write (1, RESET, 5);
-	}
-
+	if (board->nb_of_heaps == 0)
+		return ;
+	*player = !*player;
+	(display_board(board), write(1, GREEN, 8), write(1, ai_msg, 10));
+	write (1, RESET, 5);
 }
 
 int	main(int argc, char **argv)
@@ -126,8 +116,8 @@ int	main(int argc, char **argv)
 	static int		player;
 	int				fd;
 
-	write(1, "\x1B[2J\x1B[H", 8);
 	fd = 0;
+	write(1, "\x1B[2J\x1B[H", 8);
 	if (argc < 1 || argc > 2)
 		return (write(2, "ERROR\n", 6), 1);
 	if (argv[1])
