@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 04:03:44 by jraffin           #+#    #+#             */
-/*   Updated: 2022/02/12 12:10:28 by jraffin          ###   ########.fr       */
+/*   Updated: 2022/02/12 17:02:52 by wszurkow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,17 @@ int	parse_board(int fd, t_board *board)
 		board->nb_of_heaps++;
 		line = (free(line), get_next_line(fd));
 	}
-	if (!fd)
-		line = (free(line), NULL);
-	while (line && (*line == '\n' || !*line))
-		line = (free(line), get_next_line(fd));
-	if (line || errno)
-		return (free(line), 1);
-	return (0);
+	if (!line || *line == '\n' || !*line)
+		return (free(line), 0);
+	free(line);
+	return (1);
+	/*if (!fd)*/
+	/*line = (free(line), NULL);*/
+	/*while (line && (*line == '\n' || !*line))*/
+	/*line = (free(line), get_next_line(fd));*/
+	/*if (line || errno)*/
+	/*return (free(line), 1);*/
+	/*return (0);*/
 }
 
 void	display_board(t_board *board)

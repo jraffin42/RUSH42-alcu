@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 21:30:58 by wszurkow          #+#    #+#             */
-/*   Updated: 2022/02/12 16:57:39 by wszurkow         ###   ########.fr       */
+/*   Updated: 2022/02/12 17:00:38 by wszurkow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ int	main(int argc, char **argv)
 	if (board.nb_of_heaps)
 	{
 		display_board(&board);
-		write (1, "\n\033[0;33mPRESS ENTER TO CONTINUE\n\e[0m", 36);
+		write (1, "\033[0;33mPRESS ENTER TO CONTINUE\n\e[0m", 36);
 		free(get_next_line(0));
 	}
 	while (board.nb_of_heaps)
