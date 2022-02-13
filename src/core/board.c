@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 04:03:44 by jraffin           #+#    #+#             */
-/*   Updated: 2022/02/12 20:44:58 by wszurkow         ###   ########.fr       */
+/*   Updated: 2022/02/13 20:54:53 by jraffin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@
 #include "board.h"
 #include "utils.h"
 
-#define CLEAR "\x1B[2J\x1B[H"
+t_board	*get_board(void)
+{
+	static t_board	board;
+
+	return (&board);
+}
 
 static t_heap	*new_heap(int nb_al, t_heap *previous)
 {
@@ -55,13 +60,15 @@ static int	line_is_valid_number(const char *line, int *nbr)
 	return (1);
 }
 
-int	parse_board(int fd, t_board *board)
+int	parse_board(int fd)
 {
+	t_board	*board;
 	char	*line;
 	int		nbr;
 
 	if (fd == -1)
 		return (1);
+	board = get_board();
 	line = get_next_line(fd);
 	while (line && line_is_valid_number(line, &nbr))
 	{
@@ -73,67 +80,27 @@ int	parse_board(int fd, t_board *board)
 		board->nb_of_heaps++;
 		line = (free(line), get_next_line(fd));
 	}
-	write (1, CLEAR, 8);
 	if (!line || *line == '\n' || !*line)
 		return (free(line), 0);
 	free(line);
 	return (1);
 }
 
-static void	display_nb_al(int max_heap_size, int nb_al)
+void	free_all_heaps(void)
 {
-	int	i;
-	int	j;
-	int	k;
-	int	tmp;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	tmp = nb_al;
-	while (max_heap_size)
-	{
-		max_heap_size = max_heap_size / 10;
-		i++;
-	}
-	while (tmp)
-	{
-		tmp = tmp / 10;
-		j++;
-	}
-	write (1, "\033[0;36m", 8);
-	while (k++ < i - j)
-		write(1, " ", 1);
-	ft_putnbr(nb_al);
-	write(1, ") ", 2);
-	write(1, "\e[0m", 5);
-}
-
-void	display_board(t_board *board)
-{
+	t_board	*board;
+	t_heap	*to_free;
 	t_heap	*heap;
-	int		max_heap_size;
-	int		i;
 
-	max_heap_size = 0;
+	board = get_board();
 	heap = board->first;
+	board->first = NULL;
+	board->last = NULL;
+	board->nb_of_heaps = 0;
 	while (heap)
 	{
-		if (heap->nb_al > max_heap_size)
-			max_heap_size = heap->nb_al;
+		to_free = heap;
 		heap = heap->next;
-	}
-	heap = board->first;
-	while (heap)
-	{
-		i = max_heap_size - heap->nb_al;
-		display_nb_al(max_heap_size, heap->nb_al);
-		while (i--)
-			write(1, " ", 1);
-		i = 0;
-		while (i++ < heap->nb_al)
-			write(1, " |", 3);
-		write (1, "\n", 1);
-		heap = heap->next;
+		free(to_free);
 	}
 }

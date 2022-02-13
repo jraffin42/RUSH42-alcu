@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 02:45:38 by jraffin           #+#    #+#             */
-/*   Updated: 2022/02/12 20:44:17 by wszurkow         ###   ########.fr       */
+/*   Updated: 2022/02/13 20:55:09 by jraffin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ typedef struct s_gnlbuflst
 	char			*found_nl;
 }	t_gnlbuflist;
 
-char	*get_next_line(int fd);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
+char	*ft_itoa(int value, char *str);
+size_t	ft_strlen(const char *s);
+int		ft_intlen(int n);
 
-void	display_welcome(t_board *board);
-void	display_winner(int player);
-void	ft_putnbr(int n);
+char	*get_next_line(int fd);
 
 #endif

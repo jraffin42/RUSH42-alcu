@@ -1,31 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display.c                                          :+:      :+:    :+:   */
+/*   display_core.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wszurkow <wszurkow@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:37:38 by wszurkow          #+#    #+#             */
-/*   Updated: 2022/02/12 20:41:56 by wszurkow         ###   ########.fr       */
+/*   Updated: 2022/02/13 21:11:58 by jraffin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "board.h"
 #include "utils.h"
-#include <unistd.h>
-#include <stdlib.h>
 
-void	display_welcome(t_board *board)
+#define ALCU_DISPLAY_MAX_WIDTH 80
+#define ALCU_DISPLAY_MAX_BOARD_HEIGHT 20
+
+void	init_display(void)
 {
-	display_board(board);
-	write (1, "\033[0;33mPRESS ENTER TO CONTINUE\n\e[0m", 36);
-	free(get_next_line(0));
+	NULL;
 }
 
-void	display_winner(int player)
+int	max_displayable_width(void)
 {
-	if (player)
-		write (1, "The AI won! Sorry...\n", 22);
-	else
-		write (1, "You are the winner! Congratulations!\n", 37);
+	return (ALCU_DISPLAY_MAX_WIDTH);
+}
+
+int	board_max_displayable_height(void)
+{
+	return (ALCU_DISPLAY_MAX_BOARD_HEIGHT);
+}
+
+void	endgame(void)
+{
+	char	c;
+
+
+	write(1, "\e[1;33m", 7);
+	write(1, "PRESS ENTER TO EXIT...", 22);
+	write(1, "\e[0m\n", 5);
+	read(0, &c, 1);
 }

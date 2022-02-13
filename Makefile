@@ -6,7 +6,7 @@
 #    By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/12 14:25:17 by jraffin           #+#    #+#              #
-#    Updated: 2022/02/12 20:40:19 by wszurkow         ###   ########.fr        #
+#    Updated: 2022/02/13 20:55:39 by jraffin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,14 @@ SRCDIR				:=	src
 OBJDIR				:=	./obj
 DEBUGDIR			:=	./debugobj
 
-COMMONSRCS			:=	main.c				\
-						board.c				\
-						get_next_line.c		\
-						utils.c				\
-						display.c \
+COMMONSRCS			:=	core/main.c					\
+						core/board.c				\
+						core/get_next_line.c		\
+						core/utils.c				\
 
-NOBONUSSRCS			:=
+NOBONUSSRCS			:=	mandatory/display_core.c	\
+						mandatory/display_msgs.c	\
+						mandatory/display_board.c	\
 
 BONUSSRCS			:=
 

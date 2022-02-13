@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 07:22:30 by jraffin           #+#    #+#             */
-/*   Updated: 2022/02/12 20:44:31 by wszurkow         ###   ########.fr       */
+/*   Updated: 2022/02/13 20:55:29 by jraffin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,47 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	return (0);
 }
 
-void	ft_putnbr(int n)
+size_t	ft_strlen(const char *s)
 {
-	if (n == -2147483648)
-		write(1, "-2147483648", 11);
-	else
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+int	ft_intlen(int n)
+{
+	int		i;
+
+	i = (n <= 0);
+	while (n)
 	{
-		if (n < 0)
-		{
-			write(1, "-", 1);
-			n = -n;
-		}
-		if (n > 9)
-			ft_putnbr(n / 10);
-		n = n % 10 + 48;
-		write(1, &n, 1);
+		n /= 10;
+		i++;
 	}
+	return (i);
+}
+
+char	*ft_itoa(int value, char *str)
+{
+	int	i;
+
+	if (!str)
+		return (NULL);
+	i = ft_intlen(value);
+	if (value > 0)
+		value = -value;
+	str[i--] = '\0';
+	str[i--] = '0' - (value % 10);
+	value /= 10;
+	while (value)
+	{
+		str[i--] = '0' - (value % 10);
+		value /= 10;
+	}
+	if (i >= 0)
+		str[0] = '-';
+	return (str);
 }
