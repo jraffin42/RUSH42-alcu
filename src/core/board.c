@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 04:03:44 by jraffin           #+#    #+#             */
-/*   Updated: 2022/02/13 23:21:32 by jraffin          ###   ########.fr       */
+/*   Updated: 2022/02/13 23:31:18 by jraffin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,23 @@ int	parse_board(int fd)
 		return (free(line), 0);
 	free(line);
 	return (1);
+}
+
+void	free_all_heaps(void)
+{
+	t_board	*board;
+	t_heap	*to_free;
+	t_heap	*heap;
+
+	board = get_board();
+	heap = board->first;
+	board->first = NULL;
+	board->last = NULL;
+	board->nb_of_heaps = 0;
+	while (heap)
+	{
+		to_free = heap;
+		heap = heap->next;
+		free(to_free);
+	}
 }

@@ -6,7 +6,7 @@
 #    By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/12 14:25:17 by jraffin           #+#    #+#              #
-#    Updated: 2022/02/13 23:03:48 by jraffin          ###   ########.fr        #
+#    Updated: 2022/02/13 23:30:00 by jraffin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,9 @@ NOBONUSSRCS			:=	mandatory/display_core.c	\
 						mandatory/display_msgs.c	\
 						mandatory/display_board.c	\
 
-BONUSSRCS			:=	mandatory/display_core.c	\
-						mandatory/display_msgs.c	\
-						mandatory/display_board.c	\
+BONUSSRCS			:=	bonus/display_core.c		\
+						bonus/display_core.c		\
+						bonus/display_core.c		\
 
 CC					:=	cc
 RM					:=	rm
