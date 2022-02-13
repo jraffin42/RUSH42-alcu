@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 19:42:49 by jraffin           #+#    #+#             */
-/*   Updated: 2022/02/12 07:35:33 by jraffin          ###   ########.fr       */
+/*   Updated: 2022/02/13 23:01:12 by jraffin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,8 @@ char	*get_next_line(int fd)
 		return (errno = ENOMEM, NULL);
 	if (fd < 0 || fd >= GNL_FD_MAXSIZE)
 		return (errno = EBADFD, NULL);
-	if (!buflist[fd].found_nl && read_input(&buflist[fd], fd))
+	if (read(fd, NULL, 0)
+		|| (!buflist[fd].found_nl && read_input(&buflist[fd], fd)))
 		return (reset_list(&buflist[fd]), NULL);
 	line = retreive_line(&buflist[fd]);
 	if (buflist[fd].nb_buf)
