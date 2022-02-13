@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 21:30:58 by wszurkow          #+#    #+#             */
-/*   Updated: 2022/02/13 21:22:20 by jraffin          ###   ########.fr       */
+/*   Updated: 2022/02/13 23:20:46 by jraffin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	apply_move(int move)
 int	main(int argc, char **argv)
 {
 	int	fd;
-	int	move;
+	int	ai_move;
 
 	fd = 0;
 	if (argc < 1 || argc > 2)
@@ -104,16 +104,15 @@ int	main(int argc, char **argv)
 		fd = open(argv[1], O_RDONLY);
 	if (fd == -1 || parse_board(fd) || get_board()->nb_of_heaps == 0)
 		return (write(2, "ERROR\n", 6), 1);
-	display_board();
-	display_welcome();
+	init_display();
 	while (1)
 	{
-		move = get_ai_move();
-		apply_move(move);
+		ai_move = get_ai_move();
+		apply_move(ai_move);
 		if (get_board()->nb_of_heaps == 0)
 			return (display_winner(0), endgame(), 0);
 		display_board();
-		display_ai_move(move);
+		display_ai_move(ai_move);
 		apply_move(get_player_move());
 		if (get_board()->nb_of_heaps == 0)
 			return (display_winner(1), endgame(), 0);

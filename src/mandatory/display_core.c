@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:37:38 by wszurkow          #+#    #+#             */
-/*   Updated: 2022/02/13 23:10:13 by jraffin          ###   ########.fr       */
+/*   Updated: 2022/02/13 23:20:39 by jraffin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 
 void	init_display(void)
 {
-	NULL;
+	display_board();
+	display_welcome();
 }
 
 int	max_displayable_width(void)
