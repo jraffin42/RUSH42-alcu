@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 04:03:44 by jraffin           #+#    #+#             */
-/*   Updated: 2022/02/13 20:54:53 by jraffin          ###   ########.fr       */
+/*   Updated: 2022/02/13 22:24:36 by jraffin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	parse_board(int fd)
 	t_board	*board;
 	char	*line;
 	int		nbr;
+	int		ret;
 
 	if (fd == -1)
 		return (1);
@@ -80,10 +81,12 @@ int	parse_board(int fd)
 		board->nb_of_heaps++;
 		line = (free(line), get_next_line(fd));
 	}
-	if (!line || *line == '\n' || !*line)
-		return (free(line), 0);
-	free(line);
-	return (1);
+	ret = (line && *line && *line != '\n');
+	line = (free(line), get_next_line(fd));
+	while (line)
+		line = (free(line), get_next_line(fd));
+	fd = (close(fd), open("/dev/tty", O_RDONLY));
+	return (ret);
 }
 
 void	free_all_heaps(void)

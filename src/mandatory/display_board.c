@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 15:10:45 by jraffin           #+#    #+#             */
-/*   Updated: 2022/02/13 21:51:26 by jraffin          ###   ########.fr       */
+/*   Updated: 2022/02/13 22:28:40 by jraffin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	undisplayed_heaps_msg(int nb_of_undisplayed_heaps)
 	write(1, "^---- ", 6);
 	write(1, number, ft_intlen(nb_of_undisplayed_heaps));
 	write(1, " remaining undisplayed heaps. ----^", 35);
-	write(1, "\e[0m", 4);
+	write(1, "\e[0m\n", 5);
 }
 
 static void	display_heap(t_heap *heap, int max_width)
