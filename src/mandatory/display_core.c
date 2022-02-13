@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:37:38 by wszurkow          #+#    #+#             */
-/*   Updated: 2022/02/13 23:20:39 by jraffin          ###   ########.fr       */
+/*   Updated: 2022/02/13 23:24:49 by jraffin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include "board.h"
 #include "utils.h"
+#include "display.h"
 
 #define ALCU_DISPLAY_MAX_WIDTH 80
 #define ALCU_DISPLAY_MAX_BOARD_HEIGHT 20
