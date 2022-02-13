@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 15:10:45 by jraffin           #+#    #+#             */
-/*   Updated: 2022/02/13 21:40:39 by jraffin          ###   ########.fr       */
+/*   Updated: 2022/02/13 21:51:26 by jraffin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ static void	undisplayed_heaps_msg(int nb_of_undisplayed_heaps)
 
 	ft_itoa(nb_of_undisplayed_heaps, number);
 	write(1, "\e[0;90m", 7);
-	write(1, "^^^^^^^^^^----- ", 16);
+	write(1, "^---- ", 6);
 	write(1, number, ft_intlen(nb_of_undisplayed_heaps));
-	write(1, " remaining undisplayed heaps.", 29);
+	write(1, " remaining undisplayed heaps. ----^", 35);
 	write(1, "\e[0m", 4);
 }
 
@@ -95,6 +95,7 @@ void	display_board(void)
 	int		heap_size_zone_len;
 	int		heaps_to_display;
 
+	write(1, "\x1B[2J\x1B[H", 7);
 	heaps_to_display = get_board()->nb_of_heaps;
 	if (heaps_to_display > board_max_displayable_height())
 	{
@@ -108,7 +109,6 @@ void	display_board(void)
 		heap = heap->previous;
 	heap_size_zone_len = ft_intlen(get_max_heapsize_after(heap)) + 2;
 	max_heap_width = max_displayable_width() - heap_size_zone_len;
-	write(1, "\x1B[2J\x1B[H", 7);
 	while (heap)
 	{
 		display_nb_al(heap_size_zone_len, heap->nb_al);

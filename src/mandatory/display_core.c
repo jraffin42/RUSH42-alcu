@@ -6,10 +6,11 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:37:38 by wszurkow          #+#    #+#             */
-/*   Updated: 2022/02/13 21:11:58 by jraffin          ###   ########.fr       */
+/*   Updated: 2022/02/13 21:57:06 by jraffin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <unistd.h>
 #include "board.h"
 #include "utils.h"
@@ -34,11 +35,8 @@ int	board_max_displayable_height(void)
 
 void	endgame(void)
 {
-	char	c;
-
-
 	write(1, "\e[1;33m", 7);
 	write(1, "PRESS ENTER TO EXIT...", 22);
 	write(1, "\e[0m\n", 5);
-	read(0, &c, 1);
+	free(get_next_line(0));
 }
