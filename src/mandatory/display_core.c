@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:37:38 by wszurkow          #+#    #+#             */
-/*   Updated: 2022/02/13 21:57:06 by jraffin          ###   ########.fr       */
+/*   Updated: 2022/02/13 23:10:13 by jraffin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,5 @@ void	endgame(void)
 	write(1, "PRESS ENTER TO EXIT...", 22);
 	write(1, "\e[0m\n", 5);
 	free(get_next_line(0));
+	write(1, "\x1B[2J\x1B[H", 7);
 }
