@@ -6,7 +6,7 @@
 #    By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/12 14:25:17 by jraffin           #+#    #+#              #
-#    Updated: 2022/02/13 20:55:39 by jraffin          ###   ########.fr        #
+#    Updated: 2022/02/13 23:03:48 by jraffin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,17 +30,15 @@ NOBONUSSRCS			:=	mandatory/display_core.c	\
 						mandatory/display_msgs.c	\
 						mandatory/display_board.c	\
 
-BONUSSRCS			:=
+BONUSSRCS			:=	mandatory/display_core.c	\
+						mandatory/display_msgs.c	\
+						mandatory/display_board.c	\
 
 CC					:=	cc
 RM					:=	rm
 
 CCFLAGS				:=	-Wall -Wextra -Werror
 LIBFLAGS			:=
-#SANITIZE			:=	-fsanitize=thread
-#SANITIZE			+=	-fsanitize=address
-#SANITIZE			+=	-fsanitize=undefined
-#SANITIZE			+=	-fsanitize=memory
 OPTFLAG				:=
 
 NAME				:=	$(PROGNAME)
