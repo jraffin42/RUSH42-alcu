@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 15:10:45 by jraffin           #+#    #+#             */
-/*   Updated: 2022/02/13 21:12:35 by jraffin          ###   ########.fr       */
+/*   Updated: 2022/02/13 21:40:39 by jraffin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int	get_max_heapsize_after(t_heap *heap)
 {
 	int		max_heap_size;
 
+	max_heap_size = 0;
 	while (heap)
 	{
 		if (heap->nb_al > max_heap_size)
@@ -40,10 +41,10 @@ static void	display_nb_al(int heap_size_zone_len, int nb_al)
 	i = 0;
 	while (i < indent)
 		buf[i++] = ' ';
-	ft_itoa(nb_al, buf + i);
-	buf[i + len] = ')';
+	ft_itoa(nb_al, buf + indent);
+	buf[indent + len] = ')';
 	write(1, "\e[0;36m", 7);
-	write(1, buf, i);
+	write(1, buf, heap_size_zone_len);
 	write(1, "\e[0m", 4);
 }
 
@@ -75,6 +76,8 @@ static void	display_heap(t_heap *heap, int max_width)
 		max_heap_displayed_size -= 3;
 	else
 		max_heap_displayed_size = 0;
+	while (indent--)
+		write(1, " ", 1);
 	i = heap->nb_al;
 	if (heap->nb_al > max_heap_displayed_size)
 		i = max_heap_displayed_size;
@@ -103,7 +106,7 @@ void	display_board(void)
 		heap = get_board()->last;
 	while (heaps_to_display-- > 1)
 		heap = heap->previous;
-	heap_size_zone_len = ft_intlen(get_max_heapsize_after(heap)) + 1;
+	heap_size_zone_len = ft_intlen(get_max_heapsize_after(heap)) + 2;
 	max_heap_width = max_displayable_width() - heap_size_zone_len;
 	write(1, "\x1B[2J\x1B[H", 7);
 	while (heap)
