@@ -6,7 +6,7 @@
 /*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 21:38:57 by wszurkow          #+#    #+#             */
-/*   Updated: 2022/02/13 20:37:59 by jraffin          ###   ########.fr       */
+/*   Updated: 2022/02/13 21:36:43 by wszurkow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ typedef struct s_board
 
 t_board	*get_board(void);
 int		parse_board(int fd);
+int		parse_board_stdin(int fd);
 
 #endif

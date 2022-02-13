@@ -6,7 +6,7 @@
 #    By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/12 14:25:17 by jraffin           #+#    #+#              #
-#    Updated: 2022/02/13 20:55:39 by jraffin          ###   ########.fr        #
+#    Updated: 2022/02/13 21:39:48 by wszurkow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ COMMONSRCS			:=	core/main.c					\
 						core/board.c				\
 						core/get_next_line.c		\
 						core/utils.c				\
+						core/board_stdin.c
 
 NOBONUSSRCS			:=	mandatory/display_core.c	\
 						mandatory/display_msgs.c	\
@@ -38,7 +39,7 @@ RM					:=	rm
 CCFLAGS				:=	-Wall -Wextra -Werror
 LIBFLAGS			:=
 #SANITIZE			:=	-fsanitize=thread
-#SANITIZE			+=	-fsanitize=address
+SANITIZE			+=	-fsanitize=address
 #SANITIZE			+=	-fsanitize=undefined
 #SANITIZE			+=	-fsanitize=memory
 OPTFLAG				:=
